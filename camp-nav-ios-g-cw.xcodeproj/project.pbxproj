@@ -29,9 +29,22 @@
 		07BBEAC92D5FD63A00E20871 /* camp-nav-ios-g-cwUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "camp-nav-ios-g-cwUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		07BBEB252D6119A400E20871 /* Exceptions for "camp-nav-ios-g-cw" folder in "camp-nav-ios-g-cw" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 07BBEAAE2D5FD63900E20871 /* camp-nav-ios-g-cw */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		07BBEAB12D5FD63900E20871 /* camp-nav-ios-g-cw */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				07BBEB252D6119A400E20871 /* Exceptions for "camp-nav-ios-g-cw" folder in "camp-nav-ios-g-cw" target */,
+			);
 			path = "camp-nav-ios-g-cw";
 			sourceTree = "<group>";
 		};
@@ -398,6 +411,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"camp-nav-ios-g-cw/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "camp-nav-ios-g-cw/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -426,6 +440,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"camp-nav-ios-g-cw/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "camp-nav-ios-g-cw/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
