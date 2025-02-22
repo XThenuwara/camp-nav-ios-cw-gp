@@ -24,7 +24,6 @@ struct InfoCard: View {
                .fontWeight(.bold)
 
             Spacer()
-            // value should right aligned
             Text(value)
                .font(Font.custom("Quicksand-Medium", size: 16))
                .fontWeight(.bold)
@@ -35,8 +34,7 @@ struct InfoCard: View {
         .background(Color.white)
         .cornerRadius(12)
         .frame(width: 180, height: 180)
-        // shadow
-       .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
 

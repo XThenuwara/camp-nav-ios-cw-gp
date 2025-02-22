@@ -17,11 +17,23 @@ struct Navbar: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                TextField("Search", text: $searchText)
-                           .padding()
-                           .background(.backgroundGray)
-                           .cornerRadius(100)
-                
+                Button(action: {
+                    withAnimation {
+                        isMenuOpen.toggle()
+                    }
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        Text("Search")
+                            .foregroundColor(.gray)
+                        Spacer()
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.backgroundGray)
+                    .cornerRadius(100)
+                }
                 if let menuIcon = menuIcon {
                     Button(action: {
                         withAnimation {
@@ -42,13 +54,9 @@ struct Navbar: View {
             .background(Color.white)
             .foregroundColor(.white)
             .sheet(isPresented: $isMenuOpen) {
-                if let menuDrawer = menuDrawer {
-                    DrawerMenu(
-                        isOpen: $isMenuOpen,
-                        DrawerView: menuDrawer
-                    )
-                }
-                
+                DrawerMenu(
+                    isOpen: $isMenuOpen
+                )
             }
             .background(Color.blue.edgesIgnoringSafeArea(.all))
         }
@@ -58,7 +66,6 @@ struct Navbar: View {
 
 struct DrawerMenu: View {
     @Binding var isOpen: Bool
-    var DrawerView: AnyView
     
     var body: some View {
         VStack {
@@ -78,7 +85,7 @@ struct DrawerMenu: View {
                     }
                 }
                 
-                DrawerView
+                NavbarDrawer()
                 Spacer()
             }
             .frame(maxWidth: .infinity)

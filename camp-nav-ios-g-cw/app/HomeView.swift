@@ -31,26 +31,32 @@ struct HomeView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             LectureScheduleCard(lectureSchedule: LectureSchedule(
-                                day: "Monday",
-                                time: "1.00Pm",
-                                location: "LH 35",
-                                title: "IOS Lecture",
-                                batch: "Batch 23.1"
-                            ))
-                            
-                            LectureScheduleCard(lectureSchedule: LectureSchedule(
-                                day: "Monday",
-                                time: "3.00Pm",
-                                location: "LH 35",
-                                title: "IOS Lecture",
-                                batch: "Batch 23.1"
+                                location: "Room 101",
+                                batch: "23.1",
+                                module: "iOS Development",
+                                startTime: Date(),
+                                endTime: Date().addingTimeInterval(7200)
                             ))
                             LectureScheduleCard(lectureSchedule: LectureSchedule(
-                                day: "Monday",
-                                time: "3.00Pm",
-                                location: "LH 35",
-                                title: "IOS Lecture",
-                                batch: "Batch 23.1"
+                                location: "Room 101",
+                                batch: "23.1",
+                                module: "iOS Development",
+                                startTime: Date(),
+                                endTime: Date().addingTimeInterval(7200)
+                            ))
+                            LectureScheduleCard(lectureSchedule: LectureSchedule(
+                                location: "Room 101",
+                                batch: "23.1",
+                                module: "iOS Development",
+                                startTime: Date(),
+                                endTime: Date().addingTimeInterval(7200)
+                            ))
+                            LectureScheduleCard(lectureSchedule: LectureSchedule(
+                                location: "Room 101",
+                                batch: "23.1",
+                                module: "iOS Development",
+                                startTime: Date(),
+                                endTime: Date().addingTimeInterval(7200)
                             ))
                         }
                         .padding(.all)
