@@ -36,7 +36,7 @@ struct NavbarDrawer: View {
     ),
     NavigationItem(
       id: "schedule",
-      view: AnyView(Text("Schedule")),
+      view: AnyView(ScheduleView()),
       label: "Schedule",
       icon: "calendar"
     ),

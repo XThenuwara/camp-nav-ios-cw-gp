@@ -30,12 +30,19 @@ struct LectureScheduleCard: View {
                 }
             }
             
-            Text(lectureSchedule.title)
+            Text(lectureSchedule.module)
                 .font(Font.custom("Quicksand-Medium", size: 20))
                 .fontWeight(.semibold)
             
             HStack(spacing: 4) {
-                Text(lectureSchedule.time)
+                Text(lectureSchedule.startTime.formatted(date: .omitted, time: .shortened))
+                    .font(Font.custom("Quicksand-Medium", size: 16))
+                    .foregroundColor(.gray)
+                
+                Text("-")
+                    .foregroundColor(.gray)
+                
+                Text(lectureSchedule.endTime.formatted(date: .omitted, time: .shortened))
                     .font(Font.custom("Quicksand-Medium", size: 16))
                     .foregroundColor(.gray)
                 
@@ -53,7 +60,12 @@ struct LectureScheduleCard: View {
     }
 }
 
-
 #Preview {
-    LectureScheduleCard(lectureSchedule: LectureSchedule(day: "Monday", time: "10:00-12:00", location: "Room 101", title: "Introduction to Swift", batch: "Batch 1"))
+    LectureScheduleCard(lectureSchedule: LectureSchedule(
+        location: "Room 101",
+        batch: "23.1",
+        module: "iOS Development",
+        startTime: Date(),
+        endTime: Date().addingTimeInterval(7200)
+    ))
 }
