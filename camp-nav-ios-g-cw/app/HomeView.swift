@@ -28,26 +28,37 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     // Lecture Schedule Cards
-                    VStack(spacing: 12) {
-                        LectureScheduleCard(lectureSchedule: LectureSchedule(
-                            day: "Monday",
-                            time: "1.00Pm",
-                            location: "LH 35",
-                            title: "IOS Lecture",
-                            batch: "Batch 23.1"
-                        ))
-                        
-                        LectureScheduleCard(lectureSchedule: LectureSchedule(
-                            day: "Monday",
-                            time: "3.00Pm",
-                            location: "LH 35",
-                            title: "IOS Lecture",
-                            batch: "Batch 23.1"
-                        ))
+                    ScrollView {
+                        VStack(spacing: 12) {
+                            LectureScheduleCard(lectureSchedule: LectureSchedule(
+                                day: "Monday",
+                                time: "1.00Pm",
+                                location: "LH 35",
+                                title: "IOS Lecture",
+                                batch: "Batch 23.1"
+                            ))
+                            
+                            LectureScheduleCard(lectureSchedule: LectureSchedule(
+                                day: "Monday",
+                                time: "3.00Pm",
+                                location: "LH 35",
+                                title: "IOS Lecture",
+                                batch: "Batch 23.1"
+                            ))
+                            LectureScheduleCard(lectureSchedule: LectureSchedule(
+                                day: "Monday",
+                                time: "3.00Pm",
+                                location: "LH 35",
+                                title: "IOS Lecture",
+                                batch: "Batch 23.1"
+                            ))
+                        }
+                        .padding(.all)
+                        .frame(maxWidth:.infinity, alignment:.leading)
+                        .background(.backgroundGray)
+                        .cornerRadius(16)
                     }
-                    .padding(.all)
-                    .background(.backgroundGray)
-                    .cornerRadius(16)
+                    .frame(height: 315)
                     
                     // Status Cards
                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
@@ -55,7 +66,7 @@ struct HomeView: View {
                         InfoCard(title: "Cafeteria Crowd Level", lastUpdated: "Last Updated: 1 min ago", value: "LOW")
                         
                         // Library Card
-                        InfoCard(title: "Cafeteria Crowd Level", lastUpdated: "Last Updated: 1 min ago", value: "LOW")
+                        InfoCard(title: "Library Available Seats", lastUpdated: "Last Updated: 1 min ago", value: "10/34")
                     }
                     .padding(.horizontal)
                     
@@ -75,7 +86,7 @@ struct HomeView: View {
             .cornerRadius(24)
             
             // Search Bar
-            Navbar(title: "Search", menuIcon: "magnifyingglass")
+            Navbar(title: "Search", menuIcon: "line.horizontal.3")
         }
     }
 }
