@@ -5,7 +5,7 @@ class SpaceService {
     private let db = Firestore.firestore()
     private let collectionName = "librarySpaces" 
     
-    // MARK: - Create Space Booking
+   
     func createSpace(space: Space, completion: @escaping (Result<String, Error>) -> Void) {
         let data = space.toDictionary()
         
@@ -18,7 +18,7 @@ class SpaceService {
         }
     }
     
-    // MARK: - Update Space Booking
+  
     func updateSpace(space: Space, completion: @escaping (Result<String, Error>) -> Void) {
         guard let spaceId = space.id else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Space ID is missing"])))
@@ -36,7 +36,7 @@ class SpaceService {
         }
     }
     
-    // MARK: - Delete Space Booking
+
     func deleteSpace(spaceId: String, completion: @escaping (Result<String, Error>) -> Void) {
         db.collection(collectionName).document(spaceId).delete { error in
             if let error = error {
@@ -47,7 +47,7 @@ class SpaceService {
         }
     }
     
-    // MARK: - Get All Space Bookings
+ 
     func getAllSpaces(completion: @escaping (Result<[Space], Error>) -> Void) {
         db.collection(collectionName).getDocuments { snapshot, error in
             if let error = error {
@@ -68,7 +68,7 @@ class SpaceService {
         }
     }
     
-    // MARK: - Get Spaces by User ID
+ 
     func getSpacesByUserId(userId: String, completion: @escaping (Result<[Space], Error>) -> Void) {
         db.collection(collectionName)
             .whereField("userId", isEqualTo: userId)
@@ -91,7 +91,7 @@ class SpaceService {
             }
     }
     
-    // MARK: - Check Availability of a Space
+
     func isSpaceAvailable(
         role: String, seatNumber: Int, date: Date, startTime: Date, endTime: Date,type:String ,completion: @escaping (Result<Bool, Error>) -> Void) {
         let calendar = Calendar.current
@@ -136,7 +136,7 @@ class SpaceService {
             }
     }
     
-    // MARK: - Get Bookings by Type
+   
         func getSpacesByType(type: String, completion: @escaping (Result<[Space], Error>) -> Void) {
             db.collection(collectionName)
                 .whereField("type", isEqualTo: type)

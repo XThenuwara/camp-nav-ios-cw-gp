@@ -5,7 +5,7 @@ class DummyDataService {
     private let db = Firestore.firestore()
     private let collectionName = "products" // Firestore collection name
     
-    // Add dummy data to Firestore
+
     func addDummyData() {
         let dummyProducts = [
             ProductModel(
@@ -42,7 +42,7 @@ class DummyDataService {
             )
         ]
         
-        // Add each product to Firestore
+       
         for product in dummyProducts {
             let data = product.toDictionary()
             db.collection(collectionName).addDocument(data: data) { error in

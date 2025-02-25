@@ -9,7 +9,7 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack(spacing: 20) {
-            // Header
+   
             VStack(alignment: .leading, spacing: 4) {
                 Text("CAMPUS")
                     .font(Font.custom("Lexend-Medium", size: 24))
@@ -66,17 +66,17 @@ struct HomeView: View {
                     }
                     .frame(height: 315)
                     
-                    // Status Cards
+          
                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
-                        // Cafeteria Card
+                   
                         InfoCard(title: "Cafeteria Crowd Level", lastUpdated: "Last Updated: 1 min ago", value: "LOW")
                         
-                        // Library Card
+                  
                         InfoCard(title: "Library Available Seats", lastUpdated: "Last Updated: 1 min ago", value: "10/34")
                     }
                     .padding(.horizontal)
                     
-                    // Contact Card
+               
                     VStack(alignment: .leading) {
                         Text("Contact")
                             .font(.headline)
@@ -91,7 +91,7 @@ struct HomeView: View {
             .padding(.all, 8)
             .cornerRadius(24)
             
-            // Search Bar
+            
             Navbar(title: "Search", menuIcon: "line.horizontal.3")
         }
     }

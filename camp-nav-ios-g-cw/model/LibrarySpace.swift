@@ -9,7 +9,7 @@ struct LibrarySpace {
     var endTime: Date
     var seatNumber: Int
     
-    // Convert model to a dictionary for Firestore
+
     func toDictionary() -> [String: Any] {
         return [
             "userId": userId,
@@ -21,7 +21,7 @@ struct LibrarySpace {
         ]
     }
     
-    // Initialize from Firestore document
+
     init?(id: String, dictionary: [String: Any]) {
         guard let userId = dictionary["userId"] as? String,
               let role = dictionary["role"] as? String,
@@ -41,7 +41,7 @@ struct LibrarySpace {
         self.seatNumber = seatNumber
     }
     
-    // New initializer for direct property assignment
+   
     init(id: String?, userId: String, role: String, date: Date, startTime: Date, endTime: Date, seatNumber: Int) {
         self.id = id
         self.userId = userId

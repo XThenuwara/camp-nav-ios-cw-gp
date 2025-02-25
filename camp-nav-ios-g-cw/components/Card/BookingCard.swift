@@ -4,7 +4,7 @@ struct BookingCard: View {
     let space: Space
     @State private var showAlert = false
     
-    // Date Formatter for Display
+
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -17,7 +17,7 @@ struct BookingCard: View {
         return formatter
     }()
     
-    // Extracted Views
+
     private var headerView: some View {
         HStack {
             Text("Book Space")

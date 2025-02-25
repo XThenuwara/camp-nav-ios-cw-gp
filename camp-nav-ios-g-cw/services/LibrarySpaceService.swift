@@ -3,9 +3,9 @@ import FirebaseFirestore
 
 class LibrarySpaceService {
     private let db = Firestore.firestore()
-    private let collectionName = "librarySpaces" // Firestore collection name
+    private let collectionName = "librarySpaces"
     
-    // MARK: - Create Library Space Booking
+   
     func createLibrarySpace(space: LibrarySpace, completion: @escaping (Result<String, Error>) -> Void) {
         let data = space.toDictionary()
         
@@ -18,7 +18,7 @@ class LibrarySpaceService {
         }
     }
     
-    // MARK: - Update Library Space Booking
+    
     func updateLibrarySpace(space: LibrarySpace, completion: @escaping (Result<String, Error>) -> Void) {
         guard let spaceId = space.id else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Library space ID is missing"])))
@@ -36,7 +36,7 @@ class LibrarySpaceService {
         }
     }
     
-    // MARK: - Delete Library Space Booking
+   
     func deleteLibrarySpace(spaceId: String, completion: @escaping (Result<String, Error>) -> Void) {
         db.collection(collectionName).document(spaceId).delete { error in
             if let error = error {
@@ -47,7 +47,7 @@ class LibrarySpaceService {
         }
     }
     
-    // MARK: - Get All Library Space Bookings
+  
     func getAllLibrarySpaces(completion: @escaping (Result<[LibrarySpace], Error>) -> Void) {
         db.collection(collectionName).getDocuments { snapshot, error in
             if let error = error {
@@ -68,7 +68,7 @@ class LibrarySpaceService {
         }
     }
     
-    // MARK: - Get Library Spaces by User ID
+
     func getLibrarySpacesByUserId(userId: String, completion: @escaping (Result<[LibrarySpace], Error>) -> Void) {
         db.collection(collectionName)
             .whereField("userId", isEqualTo: userId)
@@ -91,9 +91,9 @@ class LibrarySpaceService {
             }
     }
     
-    // MARK: - Check Availability of a Library Space
+  
     func isSpaceAvailable(role: String, seatNumber: Int, date: Date, startTime: Date, endTime: Date, completion: @escaping (Result<Bool, Error>) -> Void) {
-        // Create start and end of the selected date to query
+     
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
         guard let startOfDay = calendar.date(from: dateComponents),
@@ -119,7 +119,7 @@ class LibrarySpaceService {
                     return
                 }
                 
-                // Check for overlapping bookings
+       
                 let hasOverlap = documents.contains { document in
                     let data = document.data()
                     guard let existingStartTime = data["startTime"] as? Timestamp,
@@ -130,8 +130,7 @@ class LibrarySpaceService {
                     let existingStart = existingStartTime.dateValue()
                     let existingEnd = existingEndTime.dateValue()
                     
-                    // Time ranges overlap if one range's start is before the other's end
-                    // and the first range's end is after the other's start
+            
                     let hasOverlap = (startTime < existingEnd && endTime > existingStart)
                     return hasOverlap
                 }

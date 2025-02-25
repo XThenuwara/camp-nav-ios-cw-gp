@@ -22,15 +22,15 @@ struct ViewTitleContainer: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal) // Apply horizontal padding only
+        .padding(.horizontal)
     }
 }
 
-// Preview
+
 struct ViewTitleContainer_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            // Preview with title and subtitle
+          
             ViewTitleContainer(
                 title: "Cafeteria",
                 subtitle: "Ready to start something?"

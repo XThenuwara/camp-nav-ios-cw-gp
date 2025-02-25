@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct DiningView: View {
-     private var productService = ProductService() // Initialize the service
-    @State private var diningProducts: [ProductModel] = [] // State to hold fetched dining products
+     private var productService = ProductService()
+    @State private var diningProducts: [ProductModel] = []
     @State private var navigationPath = NavigationPath()
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -14,7 +14,7 @@ struct DiningView: View {
             
             
             if diningProducts.isEmpty {
-                ProgressView("Loading...") // Show a loading indicator while fetching data
+                ProgressView("Loading...")
                     .padding()
             } else {
                 ProductContainer(products: diningProducts,navigationPath: $navigationPath) 
@@ -27,7 +27,7 @@ struct DiningView: View {
             productService.getAllProductsByCategory(category: "dining") { result in
                 switch result {
                 case .success(let fetchedProducts):
-                    diningProducts = fetchedProducts // Update the state with fetched products
+                    diningProducts = fetchedProducts 
                 case .failure(let error):
                     print("Error fetching dining products: \(error.localizedDescription)")
                 }

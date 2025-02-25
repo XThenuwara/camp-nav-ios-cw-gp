@@ -19,7 +19,7 @@ struct LibrarySpaceBookingForm: View {
     
     var body: some View {
         Form {
-            // Role Input
+
             Section(header: Text("Role")) {
                 HStack {
                     Image(systemName: "person.fill")
@@ -29,7 +29,7 @@ struct LibrarySpaceBookingForm: View {
                 }
             }
             
-            // Date Input
+    
             Section(header: Text("Date")) {
                 HStack {
                     Image(systemName: "calendar")
@@ -38,7 +38,7 @@ struct LibrarySpaceBookingForm: View {
                 }
             }
             
-            // Start Time Input
+    
             Section(header: Text("Start Time")) {
                 HStack {
                     Image(systemName: "clock.fill")
@@ -47,7 +47,7 @@ struct LibrarySpaceBookingForm: View {
                 }
             }
             
-            // End Time Input
+    
             Section(header: Text("End Time")) {
                 HStack {
                     Image(systemName: "clock")
@@ -56,7 +56,7 @@ struct LibrarySpaceBookingForm: View {
                 }
             }
             
-            // Seat Number Input
+
             Section(header: Text("Seat Number")) {
                 HStack {
                     Image(systemName: "number")
@@ -66,7 +66,7 @@ struct LibrarySpaceBookingForm: View {
                 }
             }
             
-            // Submit Button
+    
             Section {
                 Button(action: submitBooking) {
                     HStack {
@@ -91,9 +91,9 @@ struct LibrarySpaceBookingForm: View {
         }
     }
     
-    // Submit Booking
+
     private func submitBooking() {
-        // Validate inputs
+     
         guard !role.isEmpty, role.count == 1, "ABCDEFG".contains(role.uppercased()) else {
             alertMessage = "Please enter a valid role (A-G)."
             showAlert = true
@@ -112,7 +112,7 @@ struct LibrarySpaceBookingForm: View {
             return
         }
         
-        // Check availability of the library space
+      
         librarySpaceService.isSpaceAvailable(
             role: role.uppercased(),
             seatNumber: seatNumberInt,
@@ -124,7 +124,7 @@ struct LibrarySpaceBookingForm: View {
             switch result {
             case .success(let isAvailable):
                 if isAvailable {
-                    // Space is available, create the booking
+                   
                     let newSpace = Space(
                         id: "",
                         userId: "user123",
@@ -136,7 +136,7 @@ struct LibrarySpaceBookingForm: View {
                         type: type
                     )
                     
-                    // Use LibrarySpaceService to create the booking
+           
                     librarySpaceService.createSpace(space: newSpace) { result in
                         switch result {
                         case .success(let message):
@@ -149,7 +149,7 @@ struct LibrarySpaceBookingForm: View {
                         }
                     }
                 } else {
-                    // Space is not available, show an alert
+             
                     alertMessage = "The selected space is not available for the given time slot."
                     showAlert = true
                 }
@@ -160,7 +160,7 @@ struct LibrarySpaceBookingForm: View {
         }
     }
     
-    // Reset Form
+
     private func resetForm() {
         role = ""
         date = Date()
@@ -170,7 +170,7 @@ struct LibrarySpaceBookingForm: View {
     }
 }
 
-// Preview
+
 struct LibrarySpaceBookingForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
