@@ -11,10 +11,10 @@ import FirebaseCore
 struct ContentView: View {
     init(){
         FirebaseApp.configure()
-       
+        //DummyDataService().addDummyData()
     }
     var body: some View {
-        AllSpacesView()
+        ProductView()
     }
 }
 

@@ -3,7 +3,7 @@ import SwiftUI
 struct DrinksView: View {
      private var productService = ProductService() // Initialize the service
     @State private var drinksProducts: [ProductModel] = [] // State to hold fetched drinks products
-    
+    @State private var navigationPath = NavigationPath()
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // Title at the top left corner
@@ -17,7 +17,7 @@ struct DrinksView: View {
                 ProgressView("Loading...") // Show a loading indicator while fetching data
                     .padding()
             } else {
-                ProductContainer(products: drinksProducts) // Display products in a grid
+                ProductContainer(products: drinksProducts,navigationPath: $navigationPath) 
             }
             
             Spacer()

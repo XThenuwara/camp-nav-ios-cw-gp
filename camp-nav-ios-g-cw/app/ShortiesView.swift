@@ -3,7 +3,7 @@ import SwiftUI
 struct ShortiesView: View {
     private var productService = ProductService() // Initialize the service
     @State private var shortiesProducts: [ProductModel] = [] // State to hold fetched fast food products
-    
+    @State private var navigationPath = NavigationPath()
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // Title at the top left corner
@@ -17,7 +17,7 @@ struct ShortiesView: View {
                 ProgressView("Loading...") // Show a loading indicator while fetching data
                     .padding()
             } else {
-                ProductContainer(products: shortiesProducts) // Display products in a grid
+                ProductContainer(products: shortiesProducts,navigationPath:$navigationPath) 
             }
             
             Spacer()

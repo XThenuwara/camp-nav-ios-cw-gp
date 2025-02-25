@@ -2,16 +2,16 @@ import Foundation
 import FirebaseCore
 
 struct Space {
-    var id: String? // Document ID from Firestore
-    var userId: String // ID of the user who booked the space
+    var id: String?
+    var userId: String
     var role: String
-    var date: Date // Date of the booking
-    var startTime: Date // Start time of the booking
-    var endTime: Date // End time of the booking
-    var seatNumber: Int // Seat number in the library
+    var date: Date
+    var startTime: Date
+    var endTime: Date
+    var seatNumber: Int
     var type: String
     
-    // Convert model to a dictionary for Firestore
+  
     func toDictionary() -> [String: Any] {
         return [
             "userId": userId,
@@ -24,7 +24,7 @@ struct Space {
         ]
     }
     
-    // Initialize from Firestore document
+
     init?(id: String, dictionary: [String: Any]) {
             guard let userId = dictionary["userId"] as? String,
                   let role = dictionary["role"] as? String,
@@ -32,7 +32,7 @@ struct Space {
                 return nil
             }
             
-            // Handle Firestore Timestamps
+           
             if let dateTimestamp = dictionary["date"] as? Timestamp,
                let startTimestamp = dictionary["startTime"] as? Timestamp,
                let endTimestamp = dictionary["endTime"] as? Timestamp,
@@ -50,7 +50,7 @@ struct Space {
                 return nil
             }
         }
-    // New initializer for direct property assignment
+  
     init(id: String?, userId: String, role: String, date: Date, startTime: Date, endTime: Date, seatNumber: Int,type:String) {
         self.id = id
         self.userId = userId

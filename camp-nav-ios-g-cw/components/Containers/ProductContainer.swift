@@ -1,11 +1,10 @@
 import SwiftUI
-import SDWebImageSwiftUI // For loading images from URLs
+import SDWebImageSwiftUI
 
 struct ProductContainer: View {
-    // List of products passed through constructor
     let products: [ProductModel]
-    
-    // Define the grid layout (2 columns)
+    @Binding var navigationPath: NavigationPath
+
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -15,7 +14,7 @@ struct ProductContainer: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(products, id: \.id) { product in
-                    ProductCard(product: product)
+                    ProductCard(product: product, navigationPath: $navigationPath)
                 }
             }
             .padding()

@@ -7,15 +7,13 @@ struct ProductView: View {
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            VStack(alignment: .leading){
-                // Header
+            VStack(alignment: .leading) {
                 ViewTitleContainer(
                     title: "Cafeteria",
                     subtitle: "Ready to start something?"
                 )
                 .padding()
                 
-                // Category Container
                 CategoryContainer { category in
                     switch category {
                     case .dining:
@@ -29,19 +27,19 @@ struct ProductView: View {
                 .padding()
                 
                 Text("Recent")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .padding()
-                        
-                // Product Container
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+                
                 if products.isEmpty {
                     ProgressView("Loading...")
                         .padding()
                 } else {
-                    ProductContainer(products: products)
+                    ProductContainer(products: products, navigationPath: $navigationPath)
                 }
-                            
-                
+            }
+            .navigationDestination(for: ProductModel.self) { product in
+                FoodItemView(product: product)
             }
             .navigationDestination(for: String.self) { destination in
                 switch destination {
@@ -54,12 +52,12 @@ struct ProductView: View {
                 default:
                     EmptyView()
                 }
-            } .onAppear {
-                // Fetch products when the view appears
+            }
+            .onAppear {
                 productService.getAllProducts { result in
                     switch result {
                     case .success(let fetchedProducts):
-                        products = fetchedProducts // Update the state with fetched products
+                        products = fetchedProducts
                     case .failure(let error):
                         print("Error fetching products: \(error.localizedDescription)")
                     }

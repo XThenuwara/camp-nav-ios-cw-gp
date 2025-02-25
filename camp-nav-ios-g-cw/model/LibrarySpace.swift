@@ -1,13 +1,13 @@
 import Foundation
 
 struct LibrarySpace {
-    var id: String? // Document ID from Firestore
-    var userId: String // ID of the user who booked the space
+    var id: String?
+    var userId: String
     var role: String
-    var date: Date // Date of the booking
-    var startTime: Date // Start time of the booking
-    var endTime: Date // End time of the booking
-    var seatNumber: Int // Seat number in the library
+    var date: Date
+    var startTime: Date
+    var endTime: Date
+    var seatNumber: Int
     
     // Convert model to a dictionary for Firestore
     func toDictionary() -> [String: Any] {
