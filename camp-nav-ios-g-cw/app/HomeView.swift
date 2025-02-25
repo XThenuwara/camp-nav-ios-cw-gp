@@ -64,7 +64,7 @@ struct HomeView: View {
                         .background(.backgroundGray)
                         .cornerRadius(16)
                     }
-                    .frame(height: 315)
+                    .frame(height: 380)
                     
                     // Status Cards
                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
@@ -92,7 +92,7 @@ struct HomeView: View {
             .cornerRadius(24)
             
             // Search Bar
-            Navbar(title: "Search", menuIcon: "line.horizontal.3")
+            Navbar()
         }
     }
 }
