@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct ScheduleView: View {
+struct SchedulesView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedBatch: String = "Batch"
     @State private var selectedModule: String = "Module"
@@ -80,26 +80,27 @@ struct ScheduleView: View {
             // Schedule List
             List {
                 ForEach(filteredSchedules) { schedule in
-                    LectureScheduleCard(lectureSchedule: schedule)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets())
-                        .padding(.bottom, 8)
+                    NavigationLink(destination: ScheduleView(schedule: schedule)) {
+                        LectureScheduleCard(lectureSchedule: schedule)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets())
+                            .padding(.bottom, 8)
+                    }
+                    .listRowBackground(Color.backgroundGray)
                 }
-                .background(.backgroundGray)
             }
-            .padding(.all, 8)
+            .scrollContentBackground(.hidden)
             .cornerRadius(10)
             .listStyle(PlainListStyle())
             .background(.backgroundGray)
         }
         .navigationTitle("Schedule")
         .navigationBarBackButtonHidden(false)
-        
     }
 }
 
 #Preview {
     NavigationStack {
-        ScheduleView()
+        SchedulesView()
     }
 }
