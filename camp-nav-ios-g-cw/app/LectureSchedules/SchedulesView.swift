@@ -1,5 +1,5 @@
 //
-//  ScheduleView.swift
+//  SchedulesView.swift
 //  camp-nav-ios-g-cw
 //
 //  Created by Yasas Hansaka Thenuwara on 2025-02-22.
@@ -10,6 +10,7 @@ struct SchedulesView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedBatch: String = "Batch"
     @State private var selectedModule: String = "Module"
+    @State private var searchText: String = ""
     
     // Sample data
     let schedules = [
@@ -38,14 +39,37 @@ struct SchedulesView: View {
     }
     
     var filteredSchedules: [LectureSchedule] {
-        schedules.filter { schedule in
-            (selectedBatch == "Batch" || schedule.batch == selectedBatch) &&
-            (selectedModule == "Module" || schedule.module == selectedModule)
+        let filtered = schedules.filter { schedule in
+            let batchMatch = selectedBatch == "Batch" || schedule.batch == selectedBatch
+            let moduleMatch = selectedModule == "Module" || schedule.module == selectedModule
+            
+            if searchText.isEmpty {
+                return batchMatch && moduleMatch
+            }
+            
+            let searchMatch = schedule.module.lowercased().contains(searchText.lowercased()) ||
+                            schedule.batch.lowercased().contains(searchText.lowercased()) ||
+                            schedule.location.lowercased().contains(searchText.lowercased())
+            
+            return batchMatch && moduleMatch && searchMatch
         }
+        return filtered
     }
     
     var body: some View {
         VStack {
+            Spacer()
+            // Search bar
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                TextField("Search schedules...", text: $searchText)
+            }
+            .padding(.all, 8)
+            .background(.backgroundGray)
+            .cornerRadius(50)
+            .padding(.horizontal)
+            
             HStack {
                 Spacer()
                 
@@ -77,16 +101,13 @@ struct SchedulesView: View {
             }
             .padding()
             
+
+            
             // Schedule List
             List {
                 ForEach(filteredSchedules) { schedule in
-                    NavigationLink(destination: ScheduleView(schedule: schedule)) {
-                        LectureScheduleCard(lectureSchedule: schedule)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets())
-                            .padding(.bottom, 8)
-                    }
-                    .listRowBackground(Color.backgroundGray)
+                    LectureScheduleCard(lectureSchedule: schedule)
+                        .listRowBackground(Color.backgroundGray)
                 }
             }
             .scrollContentBackground(.hidden)

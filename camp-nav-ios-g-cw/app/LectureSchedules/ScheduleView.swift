@@ -12,6 +12,19 @@ struct ScheduleView: View {
     
     var body: some View {
         ScrollView {
+            HStack {
+                Spacer()
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 150, height: 15)
+                    .foregroundColor(Color.white)
+                    .padding()
+                Spacer()
+            }.onTapGesture {
+                withAnimation {
+                    dismiss()
+                }
+            }
+            
             VStack(alignment: .leading, spacing: 24) {
                 // Module Section
                 VStack(alignment: .leading, spacing: 12) {
@@ -25,7 +38,6 @@ struct ScheduleView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
                 .cornerRadius(12)
                 
                 // Batch Section
@@ -43,7 +55,6 @@ struct ScheduleView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
                 .cornerRadius(12)
                 
                 // Time Section
@@ -70,7 +81,6 @@ struct ScheduleView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
                 .cornerRadius(12)
                 
                 // Location Section
@@ -109,13 +119,16 @@ struct ScheduleView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
                 .cornerRadius(12)
             }
             .padding()
+            .cornerRadius(32)
+            .background(Color.white)
+            .cornerRadius(24)
         }
+        .padding(.all, 16)
         .navigationBarTitleDisplayMode(.inline)
-        .background(Color(.systemGray6))
+        .background(.backgroundGray)
     }
 }
 
