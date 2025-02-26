@@ -25,7 +25,7 @@ struct InfoCard: View {
 
             Spacer()
             Text(value)
-               .font(Font.custom("Quicksand-Medium", size: 16))
+               .font(Font.custom("lexend-Medium", size: 20))
                .fontWeight(.bold)
                .frame(maxWidth:.infinity, alignment:.trailing)
                

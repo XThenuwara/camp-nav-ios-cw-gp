@@ -65,6 +65,24 @@ struct HomeView: View {
                         .cornerRadius(16)
                     }
                     .frame(height: 380)
+                    .overlay(
+                        VStack {
+                            Spacer()
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.black.opacity(0.0),
+                                    Color.black.opacity(0.1)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .frame(height: 20)
+                        }
+                        .mask(
+                            Rectangle()
+                                .cornerRadius(24)
+                        )
+                    )
                     
                     // Status Cards
                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
@@ -90,10 +108,12 @@ struct HomeView: View {
             }
             .padding(.all, 8)
             .cornerRadius(24)
+
             
             // Search Bar
             Navbar()
         }
+        .background(.backgroundGray)
     }
 }
 

@@ -7,8 +7,8 @@ struct ProductContainer: View {
     
     // Define the grid layout (2 columns)
     let columns = [
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
+        GridItem(.flexible(), spacing: 2),
+        GridItem(.flexible(), spacing: 2)
     ]
     
     var body: some View {
@@ -17,8 +17,9 @@ struct ProductContainer: View {
                 ForEach(products, id: \.id) { product in
                     ProductCard(product: product)
                 }
+                .padding(.horizontal, 8)
             }
-            .padding()
         }
+        .padding(.horizontal, 8)
     }
 }

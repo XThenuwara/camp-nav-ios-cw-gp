@@ -14,80 +14,125 @@ struct LibrarySpaceBookingForm: View {
     private let librarySpaceService = SpaceService()
     
     init(type: String) {
-            self.type = type
-        }
+        self.type = type
+    }
     
     var body: some View {
-        Form {
-            // Role Input
-            Section(header: Text("Role")) {
-                HStack {
-                    Image(systemName: "person.fill")
-                        .foregroundColor(.gray)
-                    TextField("Enter Role (A-G)", text: $role)
-                        .keyboardType(.default)
+        VStack(spacing: 20) {
+            Form {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("BOOK YOUR")
+                        .font(Font.custom("Lexend-Medium", size: 24))
+                        .fontWeight(.bold)
+                    
+                    Text("\(type.uppercased()) SPACE")
+                        .font(Font.custom("Lexend-Medium", size: 24))
+                        .fontWeight(.bold)
                 }
-            }
-            
-            // Date Input
-            Section(header: Text("Date")) {
-                HStack {
-                    Image(systemName: "calendar")
-                        .foregroundColor(.gray)
-                    DatePicker("Select Date", selection: $date, displayedComponents: .date)
-                }
-            }
-            
-            // Start Time Input
-            Section(header: Text("Start Time")) {
-                HStack {
-                    Image(systemName: "clock.fill")
-                        .foregroundColor(.gray)
-                    DatePicker("Select Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
-                }
-            }
-            
-            // End Time Input
-            Section(header: Text("End Time")) {
-                HStack {
-                    Image(systemName: "clock")
-                        .foregroundColor(.gray)
-                    DatePicker("Select End Time", selection: $endTime, displayedComponents: .hourAndMinute)
-                }
-            }
-            
-            // Seat Number Input
-            Section(header: Text("Seat Number")) {
-                HStack {
-                    Image(systemName: "number")
-                        .foregroundColor(.gray)
-                    TextField("Enter Seat Number", text: $seatNumber)
-                        .keyboardType(.numberPad)
-                }
-            }
-            
-            // Submit Button
-            Section {
-                Button(action: submitBooking) {
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 8)
+                
+                Section {
                     HStack {
-                        Spacer()
-                        Text("Submit Booking")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        Spacer()
+                        Image(systemName: "person.fill")
+                            .foregroundColor(.gray)
+                            .frame(width: 24)
+                        TextField("Enter Role (A-G)", text: $role)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .font(Font.custom("Lexend-Medium", size: 16))
                     }
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 10)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(50)
+                } header: {
+                    Text("Role")
+                        .font(Font.custom("Lexend-Medium", size: 14))
+                        .foregroundColor(.gray)
+                }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "calendar")
+                            .foregroundColor(.gray)
+                            .frame(width: 24)
+                        DatePicker("Select Date", selection: $date, displayedComponents: .date)
+                            .font(Font.custom("Lexend-Medium", size: 16))
+                    }
+                } header: {
+                    Text("Date")
+                        .font(Font.custom("Lexend-Medium", size: 14))
+                        .foregroundColor(.gray)
+                }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "clock.fill")
+                            .foregroundColor(.gray)
+                            .frame(width: 24)
+                        DatePicker("Select Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
+                            .font(Font.custom("Lexend-Medium", size: 16))
+                    }
+                } header: {
+                    Text("Start Time")
+                        .font(Font.custom("Lexend-Medium", size: 14))
+                        .foregroundColor(.gray)
+                }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "clock")
+                            .foregroundColor(.gray)
+                            .frame(width: 24)
+                        DatePicker("Select End Time", selection: $endTime, displayedComponents: .hourAndMinute)
+                            .font(Font.custom("Lexend-Medium", size: 16))
+                    }
+                } header: {
+                    Text("End Time")
+                        .font(Font.custom("Lexend-Medium", size: 14))
+                        .foregroundColor(.gray)
+                }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "number")
+                            .foregroundColor(.gray)
+                            .frame(width: 24)
+                        TextField("Enter Seat Number", text: $seatNumber)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .font(Font.custom("Lexend-Medium", size: 16))
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 10)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(50)
+                } header: {
+                    Text("Seat Number")
+                        .font(Font.custom("Lexend-Medium", size: 14))
+                        .foregroundColor(.gray)
+                }
+                
+                Section {
+                    Button(action: submitBooking) {
+                        Text("Book Now")
+                            .font(Font.custom("Lexend-Medium", size: 16))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.black.opacity(0.8))
+                            .cornerRadius(50)
+                    }
                 }
             }
+            .scrollContentBackground(.hidden)
         }
-        .navigationTitle("Book \(type) Space")
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Booking Status"),
                 message: Text(alertMessage),
-                dismissButton: .default(Text("OK")))
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     

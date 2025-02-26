@@ -19,35 +19,66 @@ struct CategoryContainer: View {
     }
     
     @State private var selectedCategory: FoodCategory?
+    @State private var showingDrawer = false
     let onCategorySelected: (FoodCategory) -> Void
     
     var body: some View {
-        HStack {
-            ForEach(FoodCategory.allCases, id: \.self) { category in
-                VStack {
-                    Image(systemName: category.iconName)
-                        .font(.system(size: 24))
-                        .foregroundColor(selectedCategory == category ? .white : .gray)
-                        .frame(width: 60, height: 60)
-                        .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.1))
-                        .cornerRadius(12)
-                    
-                    Text(category.rawValue)
-                        .font(.caption)
-                        .foregroundColor(selectedCategory == category ? .blue : .gray)
-                }
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        selectedCategory = category
-                        onCategorySelected(category)
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Categories")
+                .font(Font.custom("Lexend-Medium", size: 20))
+                .fontWeight(.bold)
+                .padding(.horizontal)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(FoodCategory.allCases, id: \.self) { category in
+                        VStack(spacing: 12) {
+                            Image(systemName: category.iconName)
+                                .font(.system(size: 24))
+                                .foregroundColor(selectedCategory == category ? .white : .gray)
+                                .frame(width: 60, height: 60)
+                                .background(
+                                    selectedCategory == category ? 
+                                        Color.black.opacity(0.8) : 
+                                        Color.white
+                                )
+                                .cornerRadius(8)
+                                .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
+                            
+                            Text(category.rawValue)
+                                .font(Font.custom("Lexend-Medium", size: 14))
+                                .foregroundColor(selectedCategory == category ? .black : .gray)
+                        }
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                selectedCategory = category
+                                showingDrawer = true
+                                onCategorySelected(category)
+                            }
+                        }
                     }
                 }
-                
-                if category != FoodCategory.allCases.last {
-                    Spacer()
+                .padding(.horizontal)
+            }
+        }
+        .padding(.vertical)
+        .background(Color.backgroundGray)
+        .cornerRadius(16)
+        .sheet(isPresented: $showingDrawer) {
+            DrawerModal(isOpen: $showingDrawer) {
+                if let category = selectedCategory {
+                    Group {
+                        switch category {
+                        case .dining:
+                            DiningView()
+                        case .fastFood:
+                            ShortiesView()
+                        case .drinks:
+                            DrinksView()
+                        }
+                    }
                 }
             }
         }
-        .padding()
     }
 }

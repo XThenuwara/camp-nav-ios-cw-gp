@@ -1,8 +1,9 @@
 import SwiftUI
+import FirebaseCore
+
 struct ComputerRoomBookView:View{
     var body: some View {
         VStack{
-            Image(.librarySpace)
             LibrarySpaceBookingForm(type:"Computer Room")
         }
     }
