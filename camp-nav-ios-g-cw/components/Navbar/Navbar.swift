@@ -30,7 +30,7 @@ struct Navbar: View {
                     }
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.backgroundGray)
+                    .background(Color.white)
                     .cornerRadius(50)
                 }
                 
@@ -44,51 +44,22 @@ struct Navbar: View {
                         .font(.title2)
                         .foregroundColor(Color.primary)
                         .frame(width: 50, height: 50)
-                        .background(Color.backgroundGray)
+                        .background(Color.white)
                         .cornerRadius(50)
                 }
             }
             .padding()
+             .background(Color.clear)
             .frame(maxWidth: .infinity)
-            .background(
-                Color.white
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
-            )
             .sheet(isPresented: $isMenuOpen) {
-                DrawerMenu(isOpen: $isMenuOpen)
+                DrawerModal(isOpen: $isMenuOpen) {
+                    SearchDrawer()
+                }
             }
         }
     }
 }
 
-struct DrawerMenu: View {
-    @Binding var isOpen: Bool
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            // Drawer Handle
-            HStack {
-                Spacer()
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 150, height: 15)
-                    .foregroundColor(.backgroundGray)
-                    .padding()
-                Spacer()
-            }.onTapGesture {
-                withAnimation {
-                    isOpen.toggle()
-                }
-            }
-            
-            // Drawer Content
-            SearchDrawer()
-                .frame(maxWidth: .infinity)
-        }
-        .background(Color.white)
-        .transition(.move(edge: .bottom))
-        .edgesIgnoringSafeArea(.bottom)
-    }
-}
 
 
 #Preview {

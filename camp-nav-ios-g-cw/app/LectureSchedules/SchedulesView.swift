@@ -59,14 +59,30 @@ struct SchedulesView: View {
     var body: some View {
         VStack {
             Spacer()
+            // Header
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Schedules")
+                    .font(Font.custom("Lexend-Medium", size: 36))
+                    .fontWeight(.bold)
+                
+                Text("READY TO START SOMETHING?")
+                    .font(Font.custom("QuickSand-Regular", size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
+            .padding(.bottom, 20)
+            
+            Spacer()
             // Search bar
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
                 TextField("Search schedules...", text: $searchText)
             }
-            .padding(.all, 8)
-            .background(.backgroundGray)
+
+            .padding(.all, 16)
+            .background(Color.white)
             .cornerRadius(50)
             .padding(.horizontal)
             
@@ -81,7 +97,7 @@ struct SchedulesView: View {
                     }
                 }
                 .padding(.horizontal, 8)
-                .background(.backgroundGray)
+                .background(Color.white)
                 .cornerRadius(50)
                 .pickerStyle(.menu)
                 .accentColor(.black)
@@ -94,14 +110,12 @@ struct SchedulesView: View {
                     }
                 }
                 .padding(.horizontal, 8)
-                .background(.backgroundGray)
+                .background(Color.white)
                 .cornerRadius(50)
                 .pickerStyle(.menu)
                 .accentColor(.black)
             }
             .padding()
-            
-
             
             // Schedule List
             List {
@@ -115,9 +129,11 @@ struct SchedulesView: View {
             .listStyle(PlainListStyle())
             .background(.backgroundGray)
         }
-        .navigationTitle("Schedule")
         .navigationBarBackButtonHidden(false)
+        .withNavbar()
+        .background(.backgroundGray)
     }
+
 }
 
 #Preview {

@@ -23,10 +23,11 @@ struct LectureScheduleCard: View {
                     showScheduleView = true
                 }) {
                     Text("View")
+                        .font(Font.custom("lexend-Medium", size: 14))
                         .foregroundColor(.white)
                         .padding(.horizontal, 16)
-                        .padding(.vertical, 2)
-                        .background(Color.gray)
+                        .padding(.vertical, 4)
+                        .background(Color.black.opacity(0.7))
                         .cornerRadius(100)
                 }
             }
@@ -71,6 +72,7 @@ struct LectureScheduleCard: View {
                 ScheduleView(schedule: lectureSchedule)
             }
         }
+        .background(.backgroundGray)
     }
 }
 

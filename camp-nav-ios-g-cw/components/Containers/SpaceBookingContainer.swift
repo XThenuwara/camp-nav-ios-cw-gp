@@ -17,7 +17,6 @@ struct SpaceBookingContainer: View {
                         ForEach(spaces, id: \.id) { space in
                             BookingCard(space: space)
                                 .frame(maxWidth: .infinity)
-                                .padding(.horizontal)
                         }
                     }
                 }
@@ -32,7 +31,7 @@ struct SpaceBookingContainer: View {
     }
     
     private func fetchSpaces() {
-        print("Fetching spaces for type: \(type)") // Debug print
+        print("Fetching spaces for type: \(type)")
         let spaceService = SpaceService()
         spaceService.getAllSpaces() { result in
             switch result {

@@ -24,7 +24,7 @@ struct NavigationItem: Identifiable, Hashable {
 struct SearchDrawer: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
-    @State private var selectedItem: NavigationItem?
+    @State private var selectedDestination: String?
     
     let navigationItems: [NavigationItem] = [
         NavigationItem(
@@ -41,13 +41,13 @@ struct SearchDrawer: View {
         ),
         NavigationItem(
             id: "cafeteria",
-            view: AnyView(Text("Cafeteria View")),
+            view: AnyView(CafeteriaView()),
             label: "Cafeteria",
             icon: "fork.knife"
         ),
         NavigationItem(
-            id: "library",
-            view: AnyView(Text("Library View")),
+            id: "Workspaces",
+            view: AnyView(WorkspacesView()),
             label: "Library",
             icon: "book"
         ),
@@ -75,82 +75,65 @@ struct SearchDrawer: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("Search")
-                        .font(Font.custom("Lexend-Medium", size: 32))
-                        .fontWeight(.bold)
-                        .padding(.top, 10)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                }
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
-                    TextField("Search", text: $searchText)
-                }
-                .padding()
-                .background(.backgroundGray)
-                .cornerRadius(100)
-                .padding(.horizontal)
-                
-                let columns = [
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
-                ]
-                
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(filteredItems) { item in
-                            Button(action: {
-                                if item.id == "home" {
-                                    dismiss()
-                                } else {
-                                    selectedItem = item
-                                }
-                            }) {
-                                VStack {
-                                    Image(systemName: item.icon)
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.black)
-                                        .frame(width: 50, height: 50)
-                                        .background(.backgroundGray)
-                                        .clipShape(Circle())
-                                    
-                                    Text(item.label)
-                                        .font(Font.custom("Lexend-Medium", size: 16))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.gray)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
+        VStack {
+            VStack(alignment: .leading) {
+                Text("Search")
+                    .font(Font.custom("Lexend-Medium", size: 32))
+                    .fontWeight(.bold)
+                    .padding(.top, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+            }
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                TextField("Search", text: $searchText)
+            }
+            .padding()
+            .background(.backgroundGray)
+            .cornerRadius(100)
+            .padding(.horizontal)
+            
+            let columns = [
+                GridItem(.flexible()),
+                GridItem(.flexible()),
+            ]
+            
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(filteredItems) { item in
+                        Button(action: {
+                            dismiss()
+                            selectedDestination = item.id
+                            NotificationCenter.default.post(
+                                name: Notification.Name("NavigateToView"),
+                                object: nil,
+                                userInfo: ["destination": item.id]
+                            )
+                        }) {
+                            VStack {
+                                Image(systemName: item.icon)
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.black)
+                                    .frame(width: 50, height: 50)
+                                    .background(.backgroundGray)
+                                    .clipShape(Circle())
+                                
+                                Text(item.label)
+                                    .font(Font.custom("Lexend-Medium", size: 16))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
                         }
                     }
-                    .padding()
                 }
-                .background(.backgroundGray)
+                .padding()
             }
-            .fullScreenCover(item: $selectedItem) { item in
-                NavigationStack {
-                    item.view
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button(action: {
-                                    selectedItem = nil
-                                }) {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "chevron.left")
-                                        Text("Back")
-                                    }
-                                }
-                            }
-                        }
-                }
-            }
+            .background(.backgroundGray)
         }
     }
 }
