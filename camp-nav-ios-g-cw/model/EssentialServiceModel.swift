@@ -11,7 +11,7 @@ struct EssentialService: Identifiable {
     let email: [String]
 }
 
-let essentialServiceData: [EssentialService] = [
+let sampleServices: [EssentialService] = [
     EssentialService(
         name: "Exam Unit",
         overview: "Responsible for creating and managing exam timetables, publishing results, and enforcing exam regulations.",
@@ -36,7 +36,7 @@ let essentialServiceData: [EssentialService] = [
         services: ["General health check-ups.", "Basic first aid and immunizations.", "Mental health referrals and counseling coordination."],
         location: "Health & Wellness Center",
         hours: "Monday–Friday, 9 AM–5 PM",
-        phone: "(123) 456-2222",
-        email: "medicalcenter@university.edu"
+        phone: ["(123) 456-2222"],
+        email: ["medicalcenter@university.edu"]
     ),
 ]

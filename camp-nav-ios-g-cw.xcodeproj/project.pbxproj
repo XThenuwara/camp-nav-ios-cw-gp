@@ -43,7 +43,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				model/EssentialServiceModel.swift,
 			);
 			target = 07BBEAAE2D5FD63900E20871 /* camp-nav-ios-g-cw */;
 		};
