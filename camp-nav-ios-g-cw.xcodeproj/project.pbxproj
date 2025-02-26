@@ -48,11 +48,22 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		0541D3112D6F4BA5005FBDC1 /* Exceptions for "camp-nav-ios-g-cw" folder in "Copy Bundle Resources" phase from "camp-nav-ios-g-cw" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 07BBEAAD2D5FD63900E20871 /* Resources */;
+			membershipExceptions = (
+				model/EssentialServiceModel.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		07BBEAB12D5FD63900E20871 /* camp-nav-ios-g-cw */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				07BBEB252D6119A400E20871 /* Exceptions for "camp-nav-ios-g-cw" folder in "camp-nav-ios-g-cw" target */,
+				0541D3112D6F4BA5005FBDC1 /* Exceptions for "camp-nav-ios-g-cw" folder in "Copy Bundle Resources" phase from "camp-nav-ios-g-cw" target */,
 			);
 			path = "camp-nav-ios-g-cw";
 			sourceTree = "<group>";
