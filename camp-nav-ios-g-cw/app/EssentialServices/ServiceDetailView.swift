@@ -11,7 +11,8 @@ struct ServiceDetailView: View {
                     .bold()
 
                 Text(service.overview)
-                    .font(.body)
+                    .font(.subheadline)
+                    .lineSpacing(5)
 
                 Divider()
 
@@ -27,25 +28,46 @@ struct ServiceDetailView: View {
                 Divider()
 
                 if !service.location.isEmpty {
-                    Text("Location: \(service.location)")
+                    Text("Location")
+                        .font(.headline)
+
+                    Text("• \(service.location)")
                         .font(.subheadline)
+                }
+                
+                Divider()
+            
+                if !service.hours.isEmpty {
+                    Text("Operating Hours")
+                        .font(.headline)
+                    Text("• \(service.hours)")
+                        .font(.subheadline)
+                }
+                
+                Divider()
+
+                
+
+                if !service.phone.isEmpty {
+                    Text("Phone")
+                        .font(.headline)
+                    ForEach(service.phone, id: \.self){ phone in
+                        Text("• \(phone)")
+                            .font(.subheadline)
+                    }
+                }
+                
+                Divider()
+
+                if !service.email.isEmpty {
+                    Text("Email")
+                        .font(.headline)
+                    ForEach(service.email, id: \.self){ email in
+                        Text("• \(email)")
+                            .font(.subheadline)
+                    }
                 }
 
-                if !service.hours.isEmpty {
-                    Text("Hours: \(service.hours)")
-                        .font(.subheadline)
-                }
-                
-                if !service.phone.isEmpty {
-                    Text("Phone: \(service.phone[0])")
-                        .font(.subheadline)
-                }
-                
-                if !service.email.isEmpty {
-                    Text("Email: \(service.email[0])")
-                        .font(.subheadline)
-                }
-                
                 Spacer()
             }
             .padding()
