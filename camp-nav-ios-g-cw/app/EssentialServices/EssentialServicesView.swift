@@ -20,7 +20,8 @@ struct EssentialServicesView: View {
                         .font(.body)
                 }
             }
-            .navigationTitle("Essential Service Info")
+            .navigationTitle("Essential Service Information")
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: "Search services...")
         }
     }
