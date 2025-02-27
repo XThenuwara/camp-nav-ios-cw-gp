@@ -2,15 +2,12 @@ import SwiftUI
 
 struct BuildingDetailView: View {
     let building: Building
-    @Binding var selectedFloor: Floor?
     
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
                 ForEach(building.floors) { floor in
-                    Button(action: {
-                        selectedFloor = floor
-                    }) {
+                    NavigationLink(destination: FloorPlanView(floor: floor, building: building)) {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Floor \(floor.number)")
@@ -29,7 +26,6 @@ struct BuildingDetailView: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .padding()
@@ -41,6 +37,6 @@ struct BuildingDetailView: View {
 
 struct BuildingDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BuildingDetailView(building: MapData.buildings.first!, selectedFloor: .constant(nil))
+        BuildingDetailView(building: MapData.buildings.first!)
     }
 }

@@ -3,7 +3,6 @@ import MapKit
 
 struct MapView: View {
     @State private var selectedBuilding: Building?
-    @State private var selectedFloor: Floor?
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 6.9147, longitude: 79.9729),
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -65,10 +64,8 @@ struct MapView: View {
             }
             .navigationTitle("Campus Map")
             .navigationDestination(item: $selectedBuilding) { building in
-                BuildingDetailView(building: building, selectedFloor: $selectedFloor)
-            }
-            .navigationDestination(item: $selectedFloor) { floor in
-                FloorPlanView(floor: floor)
+                // Push BuildingDetailView which will handle floor selection.
+                BuildingDetailView(building: building)
             }
         }
     }
@@ -77,4 +74,3 @@ struct MapView: View {
 #Preview {
     MapView()
 }
-
