@@ -21,6 +21,8 @@ struct Floor: Identifiable, Hashable {
     let number: Int
     let rooms: [Room]
     
+    let floorPlanImageName: String?
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

@@ -117,7 +117,7 @@ struct HallMapView: View {
     NavigationStack {
         HallMapView(
             room: Room(number: "101", name: "Lecture Hall 1", type: .classroom),
-            floor: Floor(number: 1, rooms: []),
+            floor: Floor(number: 1, rooms: [], floorPlanImageName: "Main Building - 1st Floor"),
             building: Building(
                 name: "Main Building",
                 floors: [],
