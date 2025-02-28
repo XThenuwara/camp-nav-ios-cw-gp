@@ -6,51 +6,129 @@ struct ServiceDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text(service.name)
-                    .font(.title)
-                    .bold()
 
-                Text(service.overview)
-                    .font(.body)
+                VStack(spacing: 5) {
+                    Text(service.name)
+                        .font(Font.custom("Lexend-Medium", size: 20))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                Divider()
+                    Text(service.overview)
+                        .font(Font.custom("Quicksand-Medium", size: 16))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color(.white))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+
 
                 if service.services != [] {
-                    Text("Services Provided")
-                        .font(.headline)
-                    ForEach(service.services, id: \.self) { service in
-                        Text("• \(service)")
-                            .font(.subheadline)
+                    VStack(spacing: 5) {
+                        Text("Services Provided")
+                            .font(Font.custom("Lexend-Medium", size: 20))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        ForEach(service.services, id: \.self) { service in
+                            Text("• \(service)")
+                                .font(Font.custom("Quicksand-Medium", size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.white))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 }
 
-                Divider()
-
                 if !service.location.isEmpty {
-                    Text("Location: \(service.location)")
-                        .font(.subheadline)
+                    VStack(spacing: 5) {
+                        Text("Location")
+                            .font(Font.custom("Lexend-Medium", size: 20))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text("• \(service.location)")
+                            .font(Font.custom("Quicksand-Medium", size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.white))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                    
                 }
 
                 if !service.hours.isEmpty {
-                    Text("Hours: \(service.hours)")
-                        .font(.subheadline)
+                    VStack(spacing: 5) {
+                        Text("Operating Hours")
+                            .font(Font.custom("Lexend-Medium", size: 20))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("• \(service.hours)")
+                            .font(Font.custom("Quicksand-Medium", size: 16))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.white))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 }
-                
+
                 if !service.phone.isEmpty {
-                    Text("Phone: \(service.phone[0])")
-                        .font(.subheadline)
+                    VStack(spacing: 5) {
+                        Text("Phone")
+                            .font(Font.custom("Lexend-Medium", size: 20))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        ForEach(service.phone, id: \.self) { phone in
+                            Text("• \(phone)")
+                                .font(Font.custom("Quicksand-Medium", size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.white))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 }
-                
+
                 if !service.email.isEmpty {
-                    Text("Email: \(service.email[0])")
-                        .font(.subheadline)
+                    VStack(spacing: 5) {
+                        Text("Email")
+                            .font(Font.custom("Lexend-Medium", size: 20))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        ForEach(service.email, id: \.self) { email in
+                            Text("• \(email)")
+                                .font(Font.custom("Quicksand-Medium", size: 16))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.white))
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 }
-                
-                Spacer()
             }
             .padding()
         }
-        .navigationTitle(service.name)
+        .background(.backgroundGray)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

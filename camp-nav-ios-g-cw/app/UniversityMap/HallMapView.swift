@@ -1,59 +1,75 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct HallMapView: View {
     @State private var showCampusMap = false
     let room: Room
     let floor: Floor
     let building: Building
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 // Lecture Hall Section
                 VStack(alignment: .leading, spacing: 12) {
                     Text(room.name)
-                        .font(Font.custom("Lexend-Medium", size: 32))
+                        .font(Font.custom("Lexend-Medium", size: 20))
                         .fontWeight(.bold)
-                    
+
                     Text("Room \(room.number)")
                         .font(Font.custom("Quicksand-Medium", size: 18))
                         .foregroundColor(.gray)
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
-                
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+
                 // Floor Section
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Floor \(floor.number)")
                         .font(Font.custom("Lexend-Medium", size: 20))
                         .fontWeight(.semibold)
-                    
+
                     // Floor Plan Placeholder
                     ZStack {
-                        Rectangle()
-                            .fill(Color(.systemBackground))
-                            .frame(height: 200)
-                            .cornerRadius(12)
-                            .shadow(radius: 2)
-                        
-                        Text("Floor Plan")
-                            .foregroundColor(.gray)
+                        if let imageName = floor.floorPlanImageName {
+                            Rectangle()
+                                .fill(Color(.white))
+                                .frame(height: 200)
+                                .overlay(
+                                    Image(imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 400)
+                                )
+                        } else {
+                            Rectangle()
+                                .fill(Color(.white))
+                                .frame(height: 200)
+                                .cornerRadius(12)
+                                .shadow(radius: 2)
+
+                            Text("Floor Plan")
+                                .foregroundColor(.gray)
+                        }
                     }
+
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
-                
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+
                 // Building Section
                 VStack(alignment: .leading, spacing: 12) {
                     Text(building.name)
                         .font(Font.custom("Lexend-Medium", size: 20))
                         .fontWeight(.semibold)
-                    
+
                     Button(action: {
                         showCampusMap = true
                     }) {
@@ -71,25 +87,33 @@ struct HallMapView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
             }
             .padding()
+            
         }
-        .navigationTitle("Location")
+        .background(Color.backgroundGray)
         .navigationBarTitleDisplayMode(.inline)
+        
+//      Map Sheet
         .sheet(isPresented: $showCampusMap) {
             NavigationStack {
-                Map(initialPosition: .region(MKCoordinateRegion(
-                    center: building.coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-                ))) {
+                Map(
+                    initialPosition: .region(
+                        MKCoordinateRegion(
+                            center: building.coordinate,
+                            span: MKCoordinateSpan(
+                                latitudeDelta: 0.01, longitudeDelta: 0.01)
+                        ))
+                ) {
                     Annotation(building.name, coordinate: building.coordinate) {
                         VStack(spacing: 4) {
                             Image(systemName: "building.2.fill")
                                 .foregroundColor(.blue)
                                 .font(.system(size: 24))
-                            
+
                             Text(building.name)
                                 .font(.caption)
                                 .foregroundColor(.black)
@@ -117,11 +141,14 @@ struct HallMapView: View {
     NavigationStack {
         HallMapView(
             room: Room(number: "101", name: "Lecture Hall 1", type: .classroom),
-            floor: Floor(number: 1, rooms: []),
+            floor: Floor(
+                number: 1, rooms: [],
+                floorPlanImageName: "Main Building - 1st Floor"),
             building: Building(
                 name: "Main Building",
                 floors: [],
-                coordinate: CLLocationCoordinate2D(latitude: 6.9147, longitude: 79.9729)
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 6.9147, longitude: 79.9729)
             )
         )
     }

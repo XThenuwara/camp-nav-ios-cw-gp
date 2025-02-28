@@ -28,6 +28,10 @@ struct ContentView: View {
                         CafeteriaView()
                     case "WorkspacesView":
                         WorkspacesView()
+                    case "MapView":
+                        MapView()
+                    case "EssentialServicesView":
+                        EssentialServicesView()
                     default:
                         EmptyView()
                     }
@@ -44,6 +48,10 @@ struct ContentView: View {
                     navigationPath.append("CafeteriaView")
                 case "Workspaces":
                     navigationPath.append("WorkspacesView")
+                case "map":
+                    navigationPath.append("MapView")
+                case "information":
+                    navigationPath.append("EssentialServicesView")
                 default:
                     break
                 }
