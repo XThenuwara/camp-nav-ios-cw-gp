@@ -6,6 +6,8 @@ struct FloorPlanView: View {
 
     var body: some View {
         VStack(spacing: 24) {
+            
+//            Floor Plan
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Floor \(floor.number)")
                         .font(Font.custom("Lexend-Medium", size: 24))
@@ -13,10 +15,9 @@ struct FloorPlanView: View {
                     ZStack {
                         if let imageName = floor.floorPlanImageName {
                             Rectangle()
-                                .fill(Color(.systemBackground))
+                                .fill(Color(.white))
                                 .frame(height: 200)
                                 .cornerRadius(12)
-                                .shadow(radius: 2)
                                 .overlay(
                                     Image(imageName)
                                         .resizable()
@@ -24,12 +25,10 @@ struct FloorPlanView: View {
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 400)
                                         .cornerRadius(12)
-                                        .shadow(radius: 2)
-                                        .padding()
                                 )
                         } else {
                             Rectangle()
-                                .fill(Color(.systemBackground))
+                                .fill(Color(.white))
                                 .frame(height: 200)
                                 .cornerRadius(12)
                                 .shadow(radius: 2)
@@ -42,11 +41,12 @@ struct FloorPlanView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
 
 
-            // Room List: Each room is a NavigationLink to HallMapView.
+            // Room List: Link to HallMapView.
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(floor.rooms) { room in
@@ -74,8 +74,9 @@ struct FloorPlanView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .background(Color(.systemGray6))
+                            .background(Color(.white))
                             .cornerRadius(12)
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                         }
                     }
                 }
@@ -83,6 +84,7 @@ struct FloorPlanView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .padding()
+        .background(Color(.backgroundGray))
     }
 }
 

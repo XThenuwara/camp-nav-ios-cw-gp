@@ -13,7 +13,7 @@ struct HallMapView: View {
                 // Lecture Hall Section
                 VStack(alignment: .leading, spacing: 12) {
                     Text(room.name)
-                        .font(Font.custom("Lexend-Medium", size: 32))
+                        .font(Font.custom("Lexend-Medium", size: 20))
                         .fontWeight(.bold)
 
                     Text("Room \(room.number)")
@@ -22,8 +22,9 @@ struct HallMapView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
 
                 // Floor Section
                 VStack(alignment: .leading, spacing: 12) {
@@ -35,23 +36,18 @@ struct HallMapView: View {
                     ZStack {
                         if let imageName = floor.floorPlanImageName {
                             Rectangle()
-                                .fill(Color(.systemBackground))
+                                .fill(Color(.white))
                                 .frame(height: 200)
-                                .cornerRadius(12)
-                                .shadow(radius: 2)
                                 .overlay(
                                     Image(imageName)
                                         .resizable()
                                         .scaledToFit()
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 400)
-                                        .cornerRadius(12)
-                                        .shadow(radius: 2)
-                                        .padding()
                                 )
                         } else {
                             Rectangle()
-                                .fill(Color(.systemBackground))
+                                .fill(Color(.white))
                                 .frame(height: 200)
                                 .cornerRadius(12)
                                 .shadow(radius: 2)
@@ -64,8 +60,9 @@ struct HallMapView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
 
                 // Building Section
                 VStack(alignment: .leading, spacing: 12) {
@@ -90,13 +87,17 @@ struct HallMapView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
+                .background(Color(.white))
                 .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
             }
             .padding()
+            
         }
-        .navigationTitle("Location")
+        .background(Color.backgroundGray)
         .navigationBarTitleDisplayMode(.inline)
+        
+//      Map Sheet
         .sheet(isPresented: $showCampusMap) {
             NavigationStack {
                 Map(
@@ -136,19 +137,19 @@ struct HallMapView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        HallMapView(
-//            room: Room(number: "101", name: "Lecture Hall 1", type: .classroom),
-//            floor: Floor(
-//                number: 1, rooms: [],
-//                floorPlanImageName: "Main Building - 1st Floor"),
-//            building: Building(
-//                name: "Main Building",
-//                floors: [],
-//                coordinate: CLLocationCoordinate2D(
-//                    latitude: 6.9147, longitude: 79.9729)
-//            )
-//        )
-//    }
-//}
+#Preview {
+    NavigationStack {
+        HallMapView(
+            room: Room(number: "101", name: "Lecture Hall 1", type: .classroom),
+            floor: Floor(
+                number: 1, rooms: [],
+                floorPlanImageName: "Main Building - 1st Floor"),
+            building: Building(
+                name: "Main Building",
+                floors: [],
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 6.9147, longitude: 79.9729)
+            )
+        )
+    }
+}

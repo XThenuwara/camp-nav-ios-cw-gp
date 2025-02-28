@@ -13,6 +13,7 @@ struct BuildingDetailView: View {
                                 Text("Floor \(floor.number)")
                                     .font(Font.custom("Lexend-Medium", size: 20))
                                     .fontWeight(.semibold)
+                                    .foregroundColor(.black)
                                 
                                 Text("\(floor.rooms.count) Rooms")
                                     .font(Font.custom("Quicksand-Medium", size: 16))
@@ -23,13 +24,15 @@ struct BuildingDetailView: View {
                                 .foregroundColor(.gray)
                         }
                         .padding()
-                        .background(Color(.systemGray6))
+                        .background(Color(.white))
                         .cornerRadius(12)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                     }
                 }
             }
             .padding()
         }
+        .background(Color(.backgroundGray))
         .navigationTitle(building.name)
         .navigationBarTitleDisplayMode(.inline)
     }
