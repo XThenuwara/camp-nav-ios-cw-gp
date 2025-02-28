@@ -53,13 +53,13 @@ struct SearchDrawer: View {
         ),
         NavigationItem(
             id: "map",
-            view: AnyView(Text("Map View")),
+            view: AnyView(MapView()),
             label: "Map",
             icon: "map"
         ),
         NavigationItem(
             id: "information",
-            view: AnyView(Text("Contact View")),
+            view: AnyView(EssentialServicesView()),
             label: "information",
             icon: "info.circle"
         ),
