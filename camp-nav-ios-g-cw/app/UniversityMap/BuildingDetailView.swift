@@ -40,6 +40,6 @@ struct BuildingDetailView: View {
 
 struct BuildingDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BuildingDetailView(building: MapData.buildings.first!)
+        BuildingDetailView(building: sampleMapData.first!)
     }
 }

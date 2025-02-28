@@ -3,22 +3,27 @@ import SwiftUI
 
 struct MapView: View {
     @State private var selectedBuilding: Building?
-//    @State private var region = MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(latitude: 6.9147, longitude: 79.9729),
-//        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-//    )
+    @State private var searchText = ""
+    @State private var isSearching = false
+    
+
+    let buildings = sampleMapData;
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(
-                latitude: 6.9147, longitude: 79.9729),
+                latitude: 6.906254, longitude: 79.870920),
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         ))
+    
 
+    
     var body: some View {
         VStack(spacing: 20) {
+            
+            Spacer()
             // Campus Map
             Map(position: $position) {
-                ForEach(Building) { building in
+                ForEach(buildings) { building in
                     Annotation(
                         building.name, coordinate: building.coordinate
                     ) {
@@ -29,39 +34,41 @@ struct MapView: View {
                                 Image(systemName: "building.2.fill")
                                     .foregroundColor(.blue)
                                     .font(.system(size: 24))
-
-                                Text(building.name)
-                                    .font(.caption)
-                                    .foregroundColor(.black)
                             }
                         }
                     }
                 }
             }
+            .cornerRadius(10)
+            .padding(.all, 8)
             .mapStyle(.standard)
             .frame(height: 400)
+            .background(Color.white)
             .cornerRadius(15)
-            .padding(.all, 10)
-
+            
             // Buildings List
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(MapData.buildings) { building in
+                    ForEach(buildings) { building in
                         Button(action: {
                             selectedBuilding = building
                         }) {
                             MapViewCard(building: building)
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .padding(.horizontal)
                     }
                 }
             }
-            .navigationDestination(item: $selectedBuilding) { building in
-                BuildingDetailView(building: building)
-            }
         }
+        .padding(.horizontal)
         .background(Color(.backgroundGray))
+        .navigationTitle("Campus Map")
+        .navigationBarTitleDisplayMode(.large)
+        .toolbarBackground(Color(.backgroundGray), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .navigationDestination(item: $selectedBuilding) { building in
+            BuildingDetailView(building: building)
+        }
     }
 }
 

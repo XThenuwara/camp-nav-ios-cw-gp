@@ -40,5 +40,5 @@ struct MapViewCard: View {
 }
 
 #Preview {
-    MapViewCard(building: MapData.buildings[0])
+    MapViewCard(building: sampleMapData[0])
 }
